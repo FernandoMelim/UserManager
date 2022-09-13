@@ -11,7 +11,13 @@ namespace UserManager.Controllers
         }
 
         [HttpGet]
+        [Route("/{id}")]
         public IEnumerable Get()
+        {
+        }
+
+        [HttpGet]
+        public IEnumerable GetAll()
         {
         }
 

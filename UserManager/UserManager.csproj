@@ -10,10 +10,4 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Domain\Commands\Handlers\" />
-    <Folder Include="Domain\Commands\Responses\" />
-    <Folder Include="Domain\Commands\Requests\" />
-  </ItemGroup>
-
 </Project>
