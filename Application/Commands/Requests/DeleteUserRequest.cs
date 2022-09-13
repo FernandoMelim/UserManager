@@ -1,6 +1,9 @@
-﻿namespace Application.Commands.Requests;
+﻿using Application.Commands.Responses;
+using MediatR;
 
-public class DeleteUserRequest
+namespace Application.Commands.Requests;
+
+public class DeleteUserRequest : IRequest<DeleteUserResponse>
 {
 }
 

@@ -1,6 +1,10 @@
-﻿namespace Application.Commands.Requests;
+﻿using Application.Commands.Responses;
+using MediatR;
 
-public class GetUserRequest
+namespace Application.Commands.Requests;
+
+public class GetUserRequest : IRequest<GetUserResponse>
 {
+    public int Id { get; set; }
 }
 

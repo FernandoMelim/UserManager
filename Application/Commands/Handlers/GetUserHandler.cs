@@ -1,7 +1,13 @@
-﻿namespace Application.Commands.Handlers;
+﻿using Application.Commands.Requests;
+using Application.Commands.Responses;
+using MediatR;
 
-public class GetUserHandler
+public class GetUserHandler : IRequestHandler<GetUserRequest, GetUserResponse>
 {
-    public int Id { get; set; }
+    public Task<GetUserResponse> Handle(GetUserRequest request, CancellationToken cancellationToken)
+    {
+        return Task.FromResult(new GetUserResponse());
+        throw new NotImplementedException();
+    }
 }
 

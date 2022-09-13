@@ -1,8 +1,10 @@
-﻿using Domain.Enums;
+﻿using Application.Commands.Responses;
+using Domain.Enums;
+using MediatR;
 
-namespace Domain.Commands.Requests;
+namespace Application.Commands.Requests;
 
-public class PostUserRequest
+public class PostUserRequest : IRequest<PostUserResponse>
 {
     public string Name { get; set; }
 

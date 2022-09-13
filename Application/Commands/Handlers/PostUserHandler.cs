@@ -1,6 +1,15 @@
-﻿namespace Application.Commands.Handlers;
+﻿using Application.Commands.Requests;
+using Application.Commands.Responses;
+using MediatR;
 
-public class PostUserHandler
+namespace Application.Commands.Handlers;
+
+public class PostUserHandler : IRequestHandler<PostUserRequest, PostUserResponse>
 {
+    public Task<PostUserResponse> Handle(PostUserRequest request, CancellationToken cancellationToken)
+    {
+        return Task.FromResult(new PostUserResponse());
+        throw new NotImplementedException();
+    }
 }
 

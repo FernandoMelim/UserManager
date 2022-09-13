@@ -1,8 +1,10 @@
-﻿using Domain.Enums;
+﻿using Application.Commands.Responses;
+using Domain.Enums;
+using MediatR;
 
-namespace Domain.Commands.Requests;
+namespace Application.Commands.Requests;
 
-public class PatchUserRequest
+public class PatchUserRequest : IRequest<PatchUserResponse>
 {
     public int Id { get; set; }
 

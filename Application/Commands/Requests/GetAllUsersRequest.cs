@@ -1,6 +1,9 @@
-﻿namespace Application.Commands.Requests;
+﻿using Application.Commands.Responses;
+using MediatR;
 
-public class GetAllUsersRequest
+namespace Application.Commands.Requests;
+
+public class GetAllUsersRequest : IRequest<GetAllUsersResponse>
 {
 }
 
