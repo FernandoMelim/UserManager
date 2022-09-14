@@ -1,10 +1,12 @@
 using Application.Services;
+using Infrastructure;
 using Infrastructure.AppContextConfiguration;
 using Infrastructure.Middlewares;
 using Infrastructure.Repositories;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Net;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,14 +22,19 @@ builder.Services.AddControllers()
     {
         options.InvalidModelStateResponseFactory = context =>
         {
-            var response = new
+            var response = new ApiResponse
             {
-                Error = new Dictionary<string, string[]>(),
-                Type = "VALIDATION_ERRORS"
+                StatusCode = (int)HttpStatusCode.UnprocessableEntity
             };
 
             foreach (var (key, value) in context.ModelState)
-                response.Error.Add(key, value.Errors.Select(e => e.ErrorMessage).ToArray());
+            {
+                value.Errors.Select(error => error.ErrorMessage).ToList().ForEach(error =>
+                {
+                    response.Errors.Add(error);
+
+                });  
+            }
 
             return new BadRequestObjectResult(response);
         };

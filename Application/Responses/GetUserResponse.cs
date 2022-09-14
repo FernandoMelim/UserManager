@@ -1,8 +1,9 @@
 ﻿using Domain.Enums;
+using Infrastructure;
 
 namespace Application.Responses;
 
-public class GetUserResponse
+public class GetUserResponse : ApiResponse
 {
     public int Id { get; set; }
 

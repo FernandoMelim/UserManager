@@ -4,6 +4,7 @@ using AutoMapper;
 using Infrastructure.Repositories;
 using MediatR;
 using Microsoft.Extensions.Logging;
+using System.Net;
 
 namespace Application.Queries;
 
@@ -26,9 +27,11 @@ public class GetUserHandler : IRequestHandler<GetUserRequest, GetUserResponse>
     {
         try
         {
-            var user = _mapper.Map<GetUserResponse>(_userRepository.GetUser(request.Id));
+            var response = _mapper.Map<GetUserResponse>(_userRepository.GetUser(request.Id));
 
-            return Task.FromResult(user);
+            response.StatusCode = (int)HttpStatusCode.OK;
+
+            return Task.FromResult(response);
         }
         catch (Exception ex)
         {

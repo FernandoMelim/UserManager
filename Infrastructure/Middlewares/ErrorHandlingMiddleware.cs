@@ -24,25 +24,27 @@ public class ErrorHandlingMiddleware
         {
             var response = context.Response;
             response.ContentType = "application/json";
-            var result = "";
+            var result = new ApiResponse();
 
             switch (error)
             {
                 case ObjectNotFoundException:
                     // couldn't find the resource
                     response.StatusCode = (int)HttpStatusCode.NotFound;
-                    result = JsonSerializer.Serialize(new { message = "Recurso não foi encontrado" });
+                    result.StatusCode = (int)HttpStatusCode.NotFound;
+                    result.Errors.Add("Recurso não foi encontrado");
                     break;
                 default:
                     // unhandled error
                     response.StatusCode = (int)HttpStatusCode.InternalServerError;
-                    result = JsonSerializer.Serialize(new { message = "Ocorreu um erro no servidor" });
+                    result.StatusCode = (int)HttpStatusCode.InternalServerError;
+                    result.Errors.Add("Ocorreu um erro no servidor");
                     break;
             }
 
             //var result = JsonSerializer.Serialize(new { message = error?.Message });
 
-            await response.WriteAsync(result);
+            await response.WriteAsync(JsonSerializer.Serialize(result));
         }
     }
 }

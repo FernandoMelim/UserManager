@@ -4,6 +4,7 @@ using AutoMapper;
 using Infrastructure.Repositories;
 using MediatR;
 using Microsoft.Extensions.Logging;
+using System.Net;
 
 namespace Application.Queries;
 
@@ -35,6 +36,8 @@ public class GetAllUsersHandler : IRequestHandler<GetAllUsersRequest, GetAllUser
                 var userModel = _mapper.Map<UserModel>(userEntity);
                 response.UserList = response.UserList.Append(userModel);
             });
+
+            response.StatusCode = (int)HttpStatusCode.OK;
 
             return Task.FromResult(response);
         }

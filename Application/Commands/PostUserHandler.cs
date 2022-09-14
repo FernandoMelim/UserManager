@@ -5,6 +5,7 @@ using Domain.Models;
 using Infrastructure.Repositories;
 using MediatR;
 using Microsoft.Extensions.Logging;
+using System.Net;
 
 namespace Application.Commands;
 
@@ -29,9 +30,10 @@ public class PostUserHandler : IRequestHandler<PostUserRequest, PostUserResponse
         {
             var newUser = _mapper.Map<User>(request);
 
-            var createdUser = _mapper.Map<PostUserResponse>(_userRepository.CreateUser(newUser));
+            var response = _mapper.Map<PostUserResponse>(_userRepository.CreateUser(newUser));
+            response.StatusCode = (int)HttpStatusCode.OK;
 
-            return Task.FromResult(createdUser);
+            return Task.FromResult(response);
         }
         catch(Exception ex)
         {

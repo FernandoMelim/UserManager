@@ -1,8 +1,9 @@
 ﻿using Domain.Enums;
+using Infrastructure;
 
 namespace Application.Responses;
 
-public class GetAllUsersResponse
+public class GetAllUsersResponse : ApiResponse
 {
     public IEnumerable<UserModel> UserList { get; set; } = new List<UserModel>();
 }

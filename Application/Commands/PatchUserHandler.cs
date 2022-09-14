@@ -5,6 +5,7 @@ using Domain.Models;
 using Infrastructure.Repositories;
 using MediatR;
 using Microsoft.Extensions.Logging;
+using System.Net;
 
 namespace Application.Commands;
 
@@ -29,9 +30,11 @@ public class PatchUserHandler : IRequestHandler<PatchUserRequest, PatchUserRespo
         {
             var newUser = _mapper.Map<User>(request);
 
-            var createdUser = _mapper.Map<PatchUserResponse>(_userRepository.EditUser(newUser));
+            var response = _mapper.Map<PatchUserResponse>(_userRepository.EditUser(newUser));
 
-            return Task.FromResult(createdUser);
+            response.StatusCode = (int)HttpStatusCode.OK;
+
+            return Task.FromResult(response);
         }
         catch (Exception ex)
         {

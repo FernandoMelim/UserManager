@@ -1,6 +1,8 @@
-﻿namespace Application.Responses;
+﻿using Infrastructure;
 
-public class DeleteUserResponse
+namespace Application.Responses;
+
+public class DeleteUserResponse : ApiResponse
 {
 }
 

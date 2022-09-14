@@ -3,6 +3,7 @@ using Application.Responses;
 using Infrastructure.Repositories;
 using MediatR;
 using Microsoft.Extensions.Logging;
+using System.Net;
 
 namespace Application.Commands;
 
@@ -24,7 +25,13 @@ public class DeleteUserHandler : IRequestHandler<DeleteUserRequest, DeleteUserRe
         {
             _userRepository.DeleteUser(request.Id);
 
-            return Task.FromResult(new DeleteUserResponse());
+            var response = new DeleteUserResponse()
+            {
+                StatusCode = (int)HttpStatusCode.OK,
+                Errors = new List<string>()
+            };
+
+            return Task.FromResult(response);
         }
         catch (Exception ex)
         {
