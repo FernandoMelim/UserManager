@@ -27,7 +27,7 @@ public class DeleteUserHandler : IRequestHandler<DeleteUserRequest, DeleteUserRe
 
             var response = new DeleteUserResponse()
             {
-                StatusCode = (int)HttpStatusCode.OK,
+                StatusCode = HttpStatusCode.OK,
                 Errors = new List<string>()
             };
 

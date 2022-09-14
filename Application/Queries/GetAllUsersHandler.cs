@@ -37,7 +37,7 @@ public class GetAllUsersHandler : IRequestHandler<GetAllUsersRequest, GetAllUser
                 response.UserList = response.UserList.Append(userModel);
             });
 
-            response.StatusCode = (int)HttpStatusCode.OK;
+            response.StatusCode = HttpStatusCode.OK;
 
             return Task.FromResult(response);
         }

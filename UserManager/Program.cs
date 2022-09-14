@@ -24,7 +24,7 @@ builder.Services.AddControllers()
         {
             var response = new ApiResponse
             {
-                StatusCode = (int)HttpStatusCode.UnprocessableEntity
+                StatusCode = HttpStatusCode.UnprocessableEntity
             };
 
             foreach (var (key, value) in context.ModelState)

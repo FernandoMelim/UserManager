@@ -31,13 +31,13 @@ public class ErrorHandlingMiddleware
                 case ObjectNotFoundException:
                     // couldn't find the resource
                     response.StatusCode = (int)HttpStatusCode.NotFound;
-                    result.StatusCode = (int)HttpStatusCode.NotFound;
+                    result.StatusCode = HttpStatusCode.NotFound;
                     result.Errors.Add("Recurso não foi encontrado");
                     break;
                 default:
                     // unhandled error
                     response.StatusCode = (int)HttpStatusCode.InternalServerError;
-                    result.StatusCode = (int)HttpStatusCode.InternalServerError;
+                    result.StatusCode = HttpStatusCode.InternalServerError;
                     result.Errors.Add("Ocorreu um erro no servidor");
                     break;
             }

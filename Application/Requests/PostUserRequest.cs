@@ -34,7 +34,7 @@ public class PostUserRequest : IRequest<PostUserResponse>, IValidatableObject
         var validationResult = new List<ValidationResult>();
 
         if (BirthDate.Value.Date > DateTime.Now.Date)
-            validationResult.Add(new ValidationResult("Data de aniversário maior do que a data atual"));
+            validationResult.Add(new ValidationResult("Data de nascimento maior do que a data atual"));
 
         if(SchoolingLevel != null && (SchoolingLevel < 0 || (int)SchoolingLevel > 3))
             validationResult.Add(new ValidationResult("Adicione um nível escolar correto"));

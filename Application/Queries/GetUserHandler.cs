@@ -29,7 +29,7 @@ public class GetUserHandler : IRequestHandler<GetUserRequest, GetUserResponse>
         {
             var response = _mapper.Map<GetUserResponse>(_userRepository.GetUser(request.Id));
 
-            response.StatusCode = (int)HttpStatusCode.OK;
+            response.StatusCode = HttpStatusCode.OK;
 
             return Task.FromResult(response);
         }

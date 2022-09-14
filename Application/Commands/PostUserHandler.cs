@@ -31,7 +31,7 @@ public class PostUserHandler : IRequestHandler<PostUserRequest, PostUserResponse
             var newUser = _mapper.Map<User>(request);
 
             var response = _mapper.Map<PostUserResponse>(_userRepository.CreateUser(newUser));
-            response.StatusCode = (int)HttpStatusCode.OK;
+            response.StatusCode = HttpStatusCode.OK;
 
             return Task.FromResult(response);
         }

@@ -32,7 +32,7 @@ public class PatchUserHandler : IRequestHandler<PatchUserRequest, PatchUserRespo
 
             var response = _mapper.Map<PatchUserResponse>(_userRepository.EditUser(newUser));
 
-            response.StatusCode = (int)HttpStatusCode.OK;
+            response.StatusCode = HttpStatusCode.OK;
 
             return Task.FromResult(response);
         }
