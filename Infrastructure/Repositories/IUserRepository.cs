@@ -11,5 +11,7 @@ public interface IUserRepository
     void DeleteUser(int id);
 
     User GetUser(int id);
+
+    IEnumerable<User> GetAllUsers();
 }
 

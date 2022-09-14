@@ -60,5 +60,9 @@ public class UserRepository : IUserRepository
 
         return user;
     }
+
+    public IEnumerable<User> GetAllUsers()
+        => _db.Users.ToList();
+
 }
 
