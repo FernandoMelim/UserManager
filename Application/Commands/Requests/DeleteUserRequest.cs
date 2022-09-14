@@ -5,5 +5,6 @@ namespace Application.Commands.Requests;
 
 public class DeleteUserRequest : IRequest<DeleteUserResponse>
 {
+    public int Id { get; set; }
 }
 

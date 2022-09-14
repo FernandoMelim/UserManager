@@ -1,21 +1,45 @@
 ﻿using Application.Commands.Responses;
 using Domain.Enums;
 using MediatR;
+using System.ComponentModel.DataAnnotations;
 
 namespace Application.Commands.Requests;
 
 public class PatchUserRequest : IRequest<PatchUserResponse>
 {
+    [Required]
     public int Id { get; set; }
 
+    [Required(ErrorMessage = "O campo 'Nome' é obrigatório")]
+    [StringLength(255, MinimumLength = 3)]
+    [DataType(DataType.Text)]
     public string Name { get; set; }
 
+    [Required(ErrorMessage = "O campo 'Sobrenome' é obrigatório")]
+    [StringLength(255, MinimumLength = 3)]
+    [DataType(DataType.Text)]
     public string Surname { get; set; }
 
+    [Required]
+    [EmailAddress(ErrorMessage = "O campo 'E-mail' não é válido")]
+    [DataType(DataType.EmailAddress)]
     public string Email { get; set; }
 
-    public DateTime BirthDate { get; set; }
+    [Required(ErrorMessage = "O campo 'Data de nascimento' é obrigatório")]
+    [DataType(DataType.DateTime)]
+    public DateTime? BirthDate { get; set; }
 
-    public SchoolingLevelEnum SchoolingLevel { get; set; }
+    [Required(ErrorMessage = "O campo 'Nível de escolaridade' é obrigatório")]
+    public SchoolingLevelEnum? SchoolingLevel { get; set; }
+
+    public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+    {
+        var validationResult = new List<ValidationResult>();
+
+        if (BirthDate.Value.Date > DateTime.Now.Date)
+            validationResult.Add(new ValidationResult("Data de aniversário maior do que a data atual"));
+
+        return validationResult;
+    }
 }
 

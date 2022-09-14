@@ -16,35 +16,34 @@ namespace UserManager.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet]
-        [Route("/{id}")]
+        [HttpGet("{id}")]
         public Task<GetUserResponse> Get([FromRoute] int id)
         {
             return _mediator.Send(new GetUserRequest() { Id = id });
         }
 
         [HttpGet]
-        public Task<GetAllUsersResponse> GetAll()
+        public Task<GetAllUsersResponse> Get()
         {
             return _mediator.Send(new GetAllUsersRequest());
         }
 
         [HttpPost]
-        public Task<PostUserResponse> Post()
+        public Task<PostUserResponse> Post([FromBody] PostUserRequest postUserRequest)
         {
-            return _mediator.Send(new PostUserRequest());
+            return _mediator.Send<PostUserResponse>(postUserRequest);
         }
 
-        [HttpDelete]
-        public Task<DeleteUserResponse> Delete()
+        [HttpDelete("{id}")]
+        public Task<DeleteUserResponse> Delete([FromRoute] int id)
         {
-            return _mediator.Send(new DeleteUserRequest());
+            return _mediator.Send(new DeleteUserRequest() { Id = id });
         }
 
         [HttpPatch]
-        public Task<PatchUserResponse> Patch()
+        public Task<PatchUserResponse> Patch([FromBody] PatchUserRequest patchUserRequest)
         {
-            return _mediator.Send(new PatchUserRequest());
+            return _mediator.Send(patchUserRequest);
         }
     }
 }
