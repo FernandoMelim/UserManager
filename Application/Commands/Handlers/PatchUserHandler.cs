@@ -36,7 +36,7 @@ public class PatchUserHandler : IRequestHandler<PatchUserRequest, PatchUserRespo
         catch (Exception ex)
         {
             _logger.LogInformation($"Internal server error - Error trace: {ex.StackTrace}", DateTime.UtcNow);
-            throw new Exception();
+            throw ex;
         }
     }
 }

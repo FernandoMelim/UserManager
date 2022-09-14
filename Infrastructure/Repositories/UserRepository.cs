@@ -1,5 +1,7 @@
 ﻿using Domain.Models;
 using Infrastructure.AppContextConfiguration;
+using Infrastructure.Exceptions;
+using System.Data;
 
 namespace Infrastructure.Repositories;
 
@@ -21,7 +23,10 @@ public class UserRepository : IUserRepository
 
     public User EditUser(User user)
     {
-        var dbUser = _db.Users.First(x => x.Id == user.Id);
+        var dbUser = _db.Users.FirstOrDefault(x => x.Id == user.Id);
+
+        if (dbUser == null)
+            throw new ObjectNotFoundException();
 
         dbUser.Name = user.Name;
         dbUser.Surname = user.Surname;
@@ -32,6 +37,18 @@ public class UserRepository : IUserRepository
         _db.SaveChanges();
 
         return dbUser;
+    }
+
+    public void DeleteUser(int id)
+    {
+        var user = _db.Users.FirstOrDefault(x => x.Id == id);
+
+        if (user == null)
+            throw new ObjectNotFoundException();
+
+        _db.Users.Remove(user);
+
+        _db.SaveChanges();
     }
 }
 

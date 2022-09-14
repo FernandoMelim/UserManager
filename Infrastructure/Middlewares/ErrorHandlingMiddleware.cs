@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Infrastructure.Exceptions;
+using Microsoft.AspNetCore.Http;
 using System.Net;
 using System.Text.Json;
 
@@ -23,28 +24,24 @@ public class ErrorHandlingMiddleware
         {
             var response = context.Response;
             response.ContentType = "application/json";
+            var result = "";
 
-            //switch (error)
-            //{
-            //    case AppException e:
-            //        // custom application error
-            //        response.StatusCode = (int)HttpStatusCode.BadRequest;
-            //        break;
-            //    case KeyNotFoundException e:
-            //        // not found error
-            //        response.StatusCode = (int)HttpStatusCode.NotFound;
-            //        break;
-            //    default:
-            //        // unhandled error
-            //        response.StatusCode = (int)HttpStatusCode.InternalServerError;
-            //        break;
-            //}
-
-            response.StatusCode = (int)HttpStatusCode.InternalServerError;
+            switch (error)
+            {
+                case ObjectNotFoundException:
+                    // couldn't find the resource
+                    response.StatusCode = (int)HttpStatusCode.NotFound;
+                    result = JsonSerializer.Serialize(new { message = "Recurso não foi encontrado" });
+                    break;
+                default:
+                    // unhandled error
+                    response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                    result = JsonSerializer.Serialize(new { message = "Ocorreu um erro no servidor" });
+                    break;
+            }
 
             //var result = JsonSerializer.Serialize(new { message = error?.Message });
 
-            var result = JsonSerializer.Serialize(new { message = "Ocorreu um erro no servidor" });
             await response.WriteAsync(result);
         }
     }
