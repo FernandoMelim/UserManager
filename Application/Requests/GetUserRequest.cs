@@ -1,7 +1,7 @@
-﻿using Application.Commands.Responses;
+﻿using Application.Responses;
 using MediatR;
 
-namespace Application.Commands.Requests;
+namespace Application.Requests;
 
 public class GetUserRequest : IRequest<GetUserResponse>
 {

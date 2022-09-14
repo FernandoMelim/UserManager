@@ -1,14 +1,14 @@
-﻿using Application.Commands.Requests;
-using Application.Commands.Responses;
+﻿using Application.Requests;
+using Application.Responses;
 using AutoMapper;
 using Domain.Models;
 using Infrastructure.Repositories;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
-namespace Application.Commands.Handlers;
+namespace Application.Commands;
 
-public class PatchUserHandler : IRequestHandler<PatchUserRequest, PatchUserResponse>
+public class PostUserHandler : IRequestHandler<PostUserRequest, PostUserResponse>
 {
     private readonly ILogger _logger;
 
@@ -16,24 +16,24 @@ public class PatchUserHandler : IRequestHandler<PatchUserRequest, PatchUserRespo
 
     private readonly IMapper _mapper;
 
-    public PatchUserHandler(ILogger<PatchUserHandler> logger, IUserRepository userRepository, IMapper mapper)
+    public PostUserHandler(ILogger<PostUserHandler> logger, IUserRepository userRepository, IMapper mapper)
     {
         _logger = logger;
         _mapper = mapper;
         _userRepository = userRepository;
     }
 
-    public Task<PatchUserResponse> Handle(PatchUserRequest request, CancellationToken cancellationToken)
+    public Task<PostUserResponse> Handle(PostUserRequest request, CancellationToken cancellationToken)
     {
         try
         {
             var newUser = _mapper.Map<User>(request);
 
-            var createdUser = _mapper.Map<PatchUserResponse>(_userRepository.EditUser(newUser));
+            var createdUser = _mapper.Map<PostUserResponse>(_userRepository.CreateUser(newUser));
 
             return Task.FromResult(createdUser);
         }
-        catch (Exception ex)
+        catch(Exception ex)
         {
             _logger.LogInformation($"Internal server error - Error trace: {ex.StackTrace}", DateTime.UtcNow);
             throw;

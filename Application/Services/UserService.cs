@@ -1,7 +1,4 @@
-﻿using Application.Commands.Requests;
-using Domain.Models;
-using Infrastructure.AppContextConfiguration;
-using Infrastructure.Repositories;
+﻿using Infrastructure.Repositories;
 
 namespace Application.Services;
 

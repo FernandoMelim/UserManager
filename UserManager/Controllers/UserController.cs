@@ -1,5 +1,5 @@
-using Application.Commands.Requests;
-using Application.Commands.Responses;
+using Application.Requests;
+using Application.Responses;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

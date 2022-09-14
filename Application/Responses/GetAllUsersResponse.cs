@@ -1,10 +1,15 @@
 ﻿using Domain.Enums;
 
-namespace Application.Commands.Responses;
+namespace Application.Responses;
 
-public class GetUserResponse
+public class GetAllUsersResponse
 {
-    public int Id { get; set; }
+    public IEnumerable<UserModel> UserList { get; set; } = new List<UserModel>();
+}
+
+public class UserModel
+{
+    public string Id { get; set; }
 
     public string Name { get; set; }
 

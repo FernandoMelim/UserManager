@@ -1,8 +1,8 @@
 ﻿using Domain.Enums;
 
-namespace Application.Commands.Responses;
+namespace Application.Responses;
 
-public class PatchUserResponse
+public class PostUserResponse
 {
     public string Id { get; set; }
 

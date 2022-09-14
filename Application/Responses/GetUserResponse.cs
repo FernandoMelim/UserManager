@@ -1,10 +1,10 @@
 ﻿using Domain.Enums;
 
-namespace Application.Commands.Responses;
+namespace Application.Responses;
 
-public class PostUserResponse
+public class GetUserResponse
 {
-    public string Id { get; set; }
+    public int Id { get; set; }
 
     public string Name { get; set; }
 

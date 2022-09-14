@@ -1,9 +1,11 @@
-﻿using Application.Commands.Requests;
-using Application.Commands.Responses;
+﻿using Application.Requests;
+using Application.Responses;
 using AutoMapper;
 using Infrastructure.Repositories;
 using MediatR;
 using Microsoft.Extensions.Logging;
+
+namespace Application.Queries;
 
 public class GetUserHandler : IRequestHandler<GetUserRequest, GetUserResponse>
 {

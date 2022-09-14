@@ -1,6 +1,4 @@
-﻿using Application.Commands.Requests;
-
-namespace Application.Services;
+﻿namespace Application.Services;
 
 public interface IUserService
 {

@@ -1,10 +1,10 @@
-﻿using Application.Commands.Requests;
-using Application.Commands.Responses;
+﻿using Application.Requests;
+using Application.Responses;
 using Infrastructure.Repositories;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
-namespace Application.Commands.Handlers;
+namespace Application.Commands;
 
 public class DeleteUserHandler : IRequestHandler<DeleteUserRequest, DeleteUserResponse>
 {

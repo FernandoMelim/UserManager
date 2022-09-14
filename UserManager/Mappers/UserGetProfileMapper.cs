@@ -1,4 +1,4 @@
-﻿using Application.Commands.Responses;
+﻿using Application.Responses;
 using AutoMapper;
 using Domain.Models;
 

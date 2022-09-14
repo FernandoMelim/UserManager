@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddCors();
+
 // Add logs
 builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
@@ -50,6 +52,13 @@ var app = builder.Build();
 
 // Configured middlewares
 app.UseMiddleware<ErrorHandlingMiddleware>();
+
+app.UseCors(c =>
+{
+    c.AllowAnyHeader();
+    c.AllowAnyMethod();
+    c.AllowAnyOrigin();
+});
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

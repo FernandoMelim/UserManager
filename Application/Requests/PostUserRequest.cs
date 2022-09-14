@@ -1,15 +1,12 @@
-﻿using Application.Commands.Responses;
+﻿using Application.Responses;
 using Domain.Enums;
 using MediatR;
 using System.ComponentModel.DataAnnotations;
 
-namespace Application.Commands.Requests;
+namespace Application.Requests;
 
-public class PatchUserRequest : IRequest<PatchUserResponse>
+public class PostUserRequest : IRequest<PostUserResponse>, IValidatableObject
 {
-    [Required]
-    public int Id { get; set; }
-
     [Required(ErrorMessage = "O campo 'Nome' é obrigatório")]
     [StringLength(255, MinimumLength = 3)]
     [DataType(DataType.Text)]
@@ -39,7 +36,7 @@ public class PatchUserRequest : IRequest<PatchUserResponse>
         if (BirthDate.Value.Date > DateTime.Now.Date)
             validationResult.Add(new ValidationResult("Data de aniversário maior do que a data atual"));
 
-        if (SchoolingLevel != null && (SchoolingLevel < 0 || (int)SchoolingLevel > 3))
+        if(SchoolingLevel != null && (SchoolingLevel < 0 || (int)SchoolingLevel > 3))
             validationResult.Add(new ValidationResult("Adicione um nível escolar correto"));
 
         return validationResult;
