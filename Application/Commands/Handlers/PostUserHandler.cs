@@ -36,7 +36,7 @@ public class PostUserHandler : IRequestHandler<PostUserRequest, PostUserResponse
         catch(Exception ex)
         {
             _logger.LogInformation($"Internal server error - Error trace: {ex.StackTrace}", DateTime.UtcNow);
-            throw ex;
+            throw;
         }
     }
 }

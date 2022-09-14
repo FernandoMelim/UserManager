@@ -9,5 +9,7 @@ public interface IUserRepository
     User EditUser(User user);
 
     void DeleteUser(int id);
+
+    User GetUser(int id);
 }
 

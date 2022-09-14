@@ -29,7 +29,7 @@ public class DeleteUserHandler : IRequestHandler<DeleteUserRequest, DeleteUserRe
         catch (Exception ex)
         {
             _logger.LogInformation($"Internal server error - Error trace: {ex.StackTrace}", DateTime.UtcNow);
-            throw ex;
+            throw;
         }
     }
 }

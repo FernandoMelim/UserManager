@@ -50,5 +50,15 @@ public class UserRepository : IUserRepository
 
         _db.SaveChanges();
     }
+
+    public User GetUser(int id)
+    {
+        var user = _db.Users.FirstOrDefault(x => x.Id == id);
+
+        if (user == null)
+            throw new ObjectNotFoundException();
+
+        return user;
+    }
 }
 
