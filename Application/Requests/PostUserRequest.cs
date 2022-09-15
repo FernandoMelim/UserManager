@@ -17,7 +17,7 @@ public class PostUserRequest : IRequest<PostUserResponse>, IValidatableObject
     [DataType(DataType.Text)]
     public string Surname { get; set; }
 
-    [Required]
+    [Required(ErrorMessage = "O campo 'E-mail' é obrigatório")]
     [EmailAddress(ErrorMessage = "O campo 'E-mail' não é válido")]
     [DataType(DataType.EmailAddress)]
     public string Email { get; set; }
