@@ -60,6 +60,12 @@ var app = builder.Build();
 // Configured middlewares
 app.UseMiddleware<ErrorHandlingMiddleware>();
 
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<ApplicationContext>();
+    db.Database.Migrate();
+}
+
 app.UseCors(c =>
 {
     c.AllowAnyHeader();
